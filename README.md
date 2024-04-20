@@ -1,3 +1,9 @@
+## qemu clear drive cache
+
+```
+echo 3 > /proc/sys/vm/drop_caches
+```
+
 ## qemu ventoy
 
 ```
