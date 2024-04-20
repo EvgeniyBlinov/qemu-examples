@@ -5,9 +5,11 @@
 wget https://github.com/ventoy/Ventoy/releases/download/v1.0.97/ventoy-1.0.97-livecd.iso
 
 qemu-system-x86_64 \
-    -boot d \
-    -m 2048 \
-    -smp 4 \
+    -enable-kvm    \
+    -cpu host      \
+    -boot d        \
+    -m 2048        \
+    -smp 4         \
     -cdrom ventoy-1.0.97-livecd.iso
 ```
 
@@ -17,6 +19,8 @@ qemu-system-x86_64 \
 dd if=/dev/urandom of=./usb.img bs=2G count=1
 
 qemu-system-x86_64                                  \
+    -enable-kvm                                     \
+    -cpu host                                       \
     -boot order=d,menu=on                           \
     -m 2048                                         \
     -smp 4                                          \
@@ -41,11 +45,13 @@ sudo umount /mnt/usbp1
 sudo losetup -d $(sudo losetup -a |awk -F: '/usb.img/{print $1}')
 
 ## check
-qemu-system-x86_64                                  \
-    -boot order=c,menu=on                           \
-    -m 2048                                         \
-    -smp 4                                          \
-    -device nec-usb-xhci,id=xhci                    \
-    -device usb-storage,bus=xhci.0,drive=stick      \
+qemu-system-x86_64                             \
+    -enable-kvm                                \
+    -cpu host                                  \
+    -boot order=c,menu=on                      \
+    -m 2048                                    \
+    -smp 4                                     \
+    -device nec-usb-xhci,id=xhci               \
+    -device usb-storage,bus=xhci.0,drive=stick \
     -drive if=none,id=stick,format=raw,file=usb.img
 ```
