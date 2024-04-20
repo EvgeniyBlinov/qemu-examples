@@ -18,15 +18,15 @@ qemu-system-x86_64 \
 ```
 dd if=/dev/urandom of=./usb.img bs=2G count=1
 
-qemu-system-x86_64                                  \
-    -enable-kvm                                     \
-    -cpu host                                       \
-    -boot order=d,menu=on                           \
-    -m 2048                                         \
-    -smp 4                                          \
-    -drive if=none,id=stick,format=raw,file=usb.img \
-    -device nec-usb-xhci,id=xhci                    \
-    -device usb-storage,bus=xhci.0,drive=stick      \
+qemu-system-x86_64                                             \
+    -enable-kvm                                                \
+    -cpu host                                                  \
+    -boot order=d,menu=on                                      \
+    -m 2048                                                    \
+    -smp 4                                                     \
+    -drive if=none,id=stick,format=raw,cache=none,file=usb.img \
+    -device nec-usb-xhci,id=xhci                               \
+    -device usb-storage,bus=xhci.0,drive=stick                 \
     -cdrom ventoy-1.0.97-livecd.iso
 
 ## add files
@@ -53,5 +53,5 @@ qemu-system-x86_64                             \
     -smp 4                                     \
     -device nec-usb-xhci,id=xhci               \
     -device usb-storage,bus=xhci.0,drive=stick \
-    -drive if=none,id=stick,format=raw,file=usb.img
+    -drive if=none,id=stick,format=raw,cache=none,file=usb.img
 ```
