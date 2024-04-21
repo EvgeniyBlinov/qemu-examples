@@ -35,10 +35,11 @@ qemu-system-x86_64                                             \
     -device usb-storage,bus=xhci.0,drive=stick                 \
     -cdrom ventoy-1.0.97-livecd.iso
 
-## add files
-sudo losetup -fP ./usb.img
 
+## add files
 sudo mkdir -p /mnt/usbp1
+
+sudo losetup -fP ./usb.img
 
 sudo mount $(sudo losetup -a |awk -F: '/usb.img/{print $1}')p1 /mnt/usbp1
 
