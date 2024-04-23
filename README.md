@@ -58,6 +58,8 @@ qemu-system-x86_64                             \
     -boot order=c,menu=on                      \
     -m 2048                                    \
     -smp 4                                     \
+    -net user,hostfwd=tcp::10022-:22           \
+    -net nic                                   \
     -device nec-usb-xhci,id=xhci               \
     -device usb-storage,bus=xhci.0,drive=stick \
     -drive if=none,id=stick,format=raw,cache=none,file=usb.img
